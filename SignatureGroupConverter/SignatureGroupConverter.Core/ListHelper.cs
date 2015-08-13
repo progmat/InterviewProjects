@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SignatureGroupConverter.Core
 {
@@ -29,5 +30,31 @@ namespace SignatureGroupConverter.Core
         {
             throw new NotImplementedException();
         }
+
+
+        /// <summary>
+        /// Do not edit, used to generate test result from real word example
+        /// </summary>
+        /// <param name="result"></param>
+        /// <returns></returns>
+        private static string TestResultToString(List<List<string>> result)
+        {
+            var stringResult = "";
+            foreach (var grp in result)
+            {
+                stringResult += "new List<string> {";
+                var cnt = 0;
+                foreach (var p in grp)
+                {
+                    if (cnt++ > 0)
+                        stringResult += ",";
+                    stringResult += "\"" + p + "\"";
+                }
+                stringResult += "}," + Environment.NewLine;
+            }
+
+            return stringResult;
+        }
+
     }
 }
