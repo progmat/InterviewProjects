@@ -9,6 +9,11 @@ namespace Migrate.Tests
     public class ListHelperTest
     {
 
+        /// <summary>
+        /// Helper method to check, that expected and actual result lists are the same
+        /// </summary>
+        /// <param name="expectedResults"></param>
+        /// <param name="results"></param>
         private static void AssertResult(List<List<string>> expectedResults, List<List<string>> results)
         {
             for (var cnt = 0; cnt < expectedResults.Count; cnt++)
@@ -27,113 +32,72 @@ namespace Migrate.Tests
         }
 
         [Test]
-        public void ListIntersect_SingleOtherExists()
+        public void ListIntersect_SingleSigGroup()
         {
-            var toCheck = new List<string> { "1" };
             var allLists = new List<List<string>>
             {
-                toCheck,
-                new List<string> { "1","2"}
+                new List<string> { "A" }
             };
             var expectedResult = new List<List<string>>
             {
-                new List<string> { "1"}
+                new List<string> { "A"}
             };
-            var result = ListHelper.ListIntersectAll(allLists);
-            AssertResult(expectedResult, result);
-        }
-        /*
-        [Test]
-        public void ListIntersect_Single_Noother()
-        {
-            var toCheck = new List<string> { "1" };
-            var allLists = new List<List<string>>
-            {
-                toCheck,
-                new List<string> { "2","3"}
-            };
-            var expectedResult = new List<List<string>>
-            {
-                new List<string> { "1"}
-            };
-
-            var result = ListHelper.ListIntersectAll(toCheck, allLists);
+            var result = ListHelper.TransformPartnerItemListToPartnerGroupList(allLists);
             AssertResult(expectedResult, result);
         }
 
         [Test]
-        public void ListIntersect_Single_PossibleMultiple()
+        public void ListIntersect_TwoGroups_Distinct()
         {
-            var toCheck = new List<string> { "1", "2", "3", "4" };
             var allLists = new List<List<string>>
             {
-                toCheck,
-                new List<string> { "3","4","5"},
-                new List<string> { "1","4"}
+                new List<string> { "A" },
+                new List<string> { "B" }
             };
             var expectedResult = new List<List<string>>
             {
-                new List<string> { "4" },
-                new List<string> { "1" },
-                new List<string> { "3" },
-                new List<string> { "2" }
-
+                new List<string> { "A"},
+                new List<string> { "B"}
             };
-            var result = ListHelper.ListIntersectAll(toCheck, allLists);
+            var result = ListHelper.TransformPartnerItemListToPartnerGroupList(allLists);
             AssertResult(expectedResult, result);
         }
 
         [Test]
-        public void ListIntersect_Single_PossibleMultiple2()
+        public void ListIntersect_TwoGroups_Intersect()
         {
-            var toCheck = new List<string> { "1", "2", "3" };
             var allLists = new List<List<string>>
             {
-                toCheck,
-                new List<string> { "2","3"},
-                new List<string> { "2","3","4"}
+                new List<string> { "A","B" },
+                new List<string> { "A","B","C" }
             };
             var expectedResult = new List<List<string>>
             {
-                new List<string> { "1" },
-                new List<string> { "2","3" }
+                new List<string> { "A","B"},
+                new List<string> { "C"}
             };
-            var result = ListHelper.ListIntersectAll(toCheck, allLists);
+            var result = ListHelper.TransformPartnerItemListToPartnerGroupList(allLists);
             AssertResult(expectedResult, result);
         }
 
         [Test]
-        public void ListIntersect_Single_PossibleMultiple3()
+        public void ListIntersect_ThreeGroups_Complex()
         {
-            var toCheck = new List<string> { "1", "2", "3" };
             var allLists = new List<List<string>>
             {
-                toCheck,
-                new List<string> { "2","3"},
+                new List<string> { "A","B","C","D","E","F" },
+                new List<string> { "A","E","G" },
+                new List<string> { "F" }
             };
             var expectedResult = new List<List<string>>
             {
-                new List<string> { "1" },
-                new List<string> { "2","3" }
+                new List<string> { "F" },
+                new List<string> { "G"},
+                new List<string> { "A","E"},
+                new List<string> { "B","C","D"}
             };
-            var result = ListHelper.ListIntersectAll(toCheck, allLists);
+            var result = ListHelper.TransformPartnerItemListToPartnerGroupList(allLists);
             AssertResult(expectedResult, result);
         }
-        [Test]
-        public void ListIntersect_Single_PossibleMultiple4()
-        {
-            var toCheck = new List<string> { "1", "2", "3" };
-            var allLists = new List<List<string>>
-            {
-                toCheck,
-                new List<string> { "4","5"},
-            };
-            var expectedResult = new List<List<string>>
-            {
-                new List<string> { "1","2","3" }
-            };
-            var result = ListHelper.ListIntersectAll(toCheck, allLists);
-            AssertResult(expectedResult, result);
-        }*/
     }
 }
