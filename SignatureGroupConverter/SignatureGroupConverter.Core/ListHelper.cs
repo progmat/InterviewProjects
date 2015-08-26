@@ -26,6 +26,7 @@ namespace SignatureGroupConverter.Core
         /// </summary>
         /// <param name="allLists">Partner assignemnt of siggroups</param>
         /// <returns>Partner groups in length/alphabetical order as above</returns>
+        /// hello
         public static List<List<string>> TransformPartnerItemListToPartnerGroupList(List<List<string>> allLists)
         {
             throw new NotImplementedException();
