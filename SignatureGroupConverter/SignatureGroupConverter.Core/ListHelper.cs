@@ -26,11 +26,36 @@ namespace SignatureGroupConverter.Core
         /// </summary>
         /// <param name="allLists">Partner assignemnt of siggroups</param>
         /// <returns>Partner groups in length/alphabetical order as above</returns>
+
         public static List<List<string>> TransformPartnerItemListToPartnerGroupList(List<List<string>> allLists)
         {
+           int n=allLists.Count();
+            Display(allLists);
+            Console.WriteLine("Count of rows: " + n);
+            Console.ReadKey();
             throw new NotImplementedException();
+            
         }
+        static void Display(List<List<String>> list)
+        {
+            //
+            // Display everything in the List.
+            //
+            int tmp;
+            // tmp = sublist.Count;
+            Console.WriteLine("Elements:");
+            foreach (var sublist in list)
+            {
+                foreach (var value in sublist)
+                {
+                    Console.Write(value);
+                    Console.Write(' ');
+                }
+                Console.WriteLine();
+            }
+            Console.ReadKey();
 
+        }
 
         /// <summary>
         /// Do not edit, used to generate test result from real word example
