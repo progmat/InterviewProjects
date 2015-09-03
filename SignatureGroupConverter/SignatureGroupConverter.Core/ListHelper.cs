@@ -29,33 +29,62 @@ namespace SignatureGroupConverter.Core
 
         public static List<List<string>> TransformPartnerItemListToPartnerGroupList(List<List<string>> allLists)
         {
-           int n=allLists.Count();
-            Display(allLists);
-            Console.WriteLine("Count of rows: " + n);
-            Console.ReadKey();
+            int n = allLists.Count();
+
+           OrderByCount(allLists);
+          // Console.WriteLine("Count of rows: " + n);
+        Console.ReadKey();
             throw new NotImplementedException();
-            
-        }
-        static void Display(List<List<String>> list)
-        {
-            //
-            // Display everything in the List.
-            //
-            int tmp;
-            // tmp = sublist.Count;
-            Console.WriteLine("Elements:");
-            foreach (var sublist in list)
-            {
-                foreach (var value in sublist)
-                {
-                    Console.Write(value);
-                    Console.Write(' ');
-                }
-                Console.WriteLine();
-            }
-            Console.ReadKey();
 
         }
+
+      
+        class Tomb
+        {
+            public string Name { get; set; }
+            public int Num { get; set; }
+        }
+
+
+        public static void OrderByCount(List<List<String>> list)
+        {
+           
+            foreach (var sublist in list)
+            {
+
+                //HashSet <string> hash = new HashSet<string>(sublist);
+                var hash = new HashSet<string>(sublist);
+                
+
+                int tmp = sublist.Count;
+                Tomb[] tombL = { new Tomb { Name=string.Join(",", hash), Num=sublist.Count() } };
+              
+                    IEnumerable<Tomb> query = tombL.OrderBy(tomb => tomb.Num);
+              
+                foreach (Tomb tomb in query)
+                    {
+                    
+                    Console.WriteLine("{0} - {1}", tomb.Name.ToString(), tomb.Num);
+                  
+                    }
+                
+            }
+
+
+            //Console.Write(tmp);
+
+
+            Console.ReadKey();
+
+           
+        }
+
+       
+       
+     
+
+
+
 
         /// <summary>
         /// Do not edit, used to generate test result from real word example
