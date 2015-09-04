@@ -50,7 +50,7 @@ namespace SignatureGroupConverter.Core
         {
            
             foreach (var sublist in list)
-            {
+            { ///
 
                 //HashSet <string> hash = new HashSet<string>(sublist);
                 var hash = new HashSet<string>(sublist);
