@@ -29,61 +29,32 @@ namespace SignatureGroupConverter.Core
 
         public static List<List<string>> TransformPartnerItemListToPartnerGroupList(List<List<string>> allLists)
         {
-            int n = allLists.Count();
 
-           OrderByCount(allLists);
-          // Console.WriteLine("Count of rows: " + n);
-        Console.ReadKey();
+            OrderByCount(allLists);
+
+            Console.ReadKey();
             throw new NotImplementedException();
 
         }
 
-      
-        class Tomb
-        {
-            public string Name { get; set; }
-            public int Num { get; set; }
-        }
-
-
         public static void OrderByCount(List<List<String>> list)
         {
            
-            foreach (var sublist in list)
-            { ///
+          list = list.OrderBy(item => item.Count()).ToList();
+            foreach (List<string> sublist in list)
+            {
+                foreach (var value in sublist)
+                {
+                   Console.Write(value);
 
-                //HashSet <string> hash = new HashSet<string>(sublist);
-                var hash = new HashSet<string>(sublist);
-                
-
-                int tmp = sublist.Count;
-                Tomb[] tombL = { new Tomb { Name=string.Join(",", hash), Num=sublist.Count() } };
-              
-                    IEnumerable<Tomb> query = tombL.OrderBy(tomb => tomb.Num);
-              
-                foreach (Tomb tomb in query)
-                    {
-                    
-                    Console.WriteLine("{0} - {1}", tomb.Name.ToString(), tomb.Num);
-                  
-                    }
-                
+                    Console.Write(' ');
+                }
+                Console.WriteLine();
             }
-
-
-            //Console.Write(tmp);
-
 
             Console.ReadKey();
 
-           
         }
-
-       
-       
-     
-
-
 
 
         /// <summary>
