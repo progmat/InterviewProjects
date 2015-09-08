@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -32,25 +33,66 @@ namespace SignatureGroupConverter.Core
 
             OrderByCount(allLists);
 
-            Console.ReadKey();
             throw new NotImplementedException();
 
         }
-        
+        private static void DisplaySet(HashSet<string> set)
+        {
+            Console.Write("{");
+            foreach (var i in set)
+            {
+                Console.Write(" {0}", i);
+            }
+            Console.WriteLine(" }");
+        }
         public static void OrderByCount(List<List<String>> list)
         {
            
+       
           list = list.OrderBy(item => item.Count()).ToList();
-            foreach (List<string> sublist in list)
+           
+            int i = 0;
+            while (i < list.Count()-1)
             {
-                foreach (var value in sublist)
-                {
-                   Console.Write(value);
 
-                    Console.Write(' ');
+                HashSet<string> listIntersect = new HashSet<string> ();
+                
+                if (list[i].Intersect(list[i + 1]).Any())
+                {
+                    listIntersect = new HashSet<string>(list[i].Intersect(list[i + 1]));
                 }
-                Console.WriteLine();
-            }
+
+                HashSet<string> listExcept = new HashSet<string>();
+                HashSet<string> tempList = new HashSet<string>();
+                HashSet<string> listRest = new HashSet<string>();
+              
+                HashSet<string> listAll = new HashSet<string>();
+
+                if (list[i].Except(list[i + 1]).Any())
+                {
+                   listExcept = new HashSet<string>(list[i].Except(list[i + 1]));
+                    
+                   tempList = new HashSet<string>( listIntersect.Union(listExcept));
+                   
+                }
+               
+                i++;
+               
+
+                if (i == list.Count()-1)
+                {
+                    listRest = new HashSet<string>( list[list.Count() - 1].Except(tempList));
+                    
+                }
+
+                  listAll = new HashSet<string>(tempList.Union(listRest));
+
+                
+                DisplaySet(listAll);
+            } 
+            
+   
+            
 
             Console.ReadKey();
 
