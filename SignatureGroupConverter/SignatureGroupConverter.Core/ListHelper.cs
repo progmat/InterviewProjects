@@ -54,7 +54,7 @@ namespace SignatureGroupConverter.Core
             int i = 0;
             while (i < list.Count()-1)
             {
-
+                
                 HashSet<string> listIntersect = new HashSet<string> ();
                 
                 if (list[i].Intersect(list[i + 1]).Any())
