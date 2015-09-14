@@ -38,14 +38,18 @@ namespace SignatureGroupConverter.Core
         }
 
 
-        private static void DisplaySet(HashSet<string> set)
+        private static void DisplaySet(List<List<string>> set)
         {
-            Console.Write("{");
-            foreach (var i in set)
+            foreach (var sublist in set)
             {
-                Console.Write(" {0}", i);
+                Console.Write("{");
+                foreach (var k in sublist)
+                {
+                    Console.Write("{0}", k);
+
+                }
+                Console.WriteLine("}");
             }
-            Console.WriteLine(" }");
         }
 
 
@@ -54,61 +58,52 @@ namespace SignatureGroupConverter.Core
 
 
             list = list.OrderBy(item => item.Count()).ToList();
-
+            HashSet<string> sumAll = new HashSet<string>();
+            HashSet<string> listIntersect = new HashSet<string>();
+            HashSet<string> listExcept = new HashSet<string>();
+            HashSet<string> listEndExc = new HashSet<string>();
+            List<List<string>> tmpIntExc = new List<List<string>>(); // List of lists
             int i = 0;
             while (i < list.Count() - 1)
             {
+          
+                listIntersect = new HashSet<string>(list[i].Intersect(list[i + 1]));
+                listIntersect.ExceptWith(sumAll);
+                sumAll.UnionWith(listIntersect);
 
-                HashSet<string> listIntersect = new HashSet<string>();
-
-                if (list[i].Intersect(list[i + 1]).Any())
-                {
-                    listIntersect = new HashSet<string>(list[i].Intersect(list[i + 1]));
-                }
-
-                HashSet<string> listExcept = new HashSet<string>();
-                HashSet<string> tempList = new HashSet<string>();
-                HashSet<string> listRest = new HashSet<string>();
-
-                HashSet<string> listAll = new HashSet<string>();
-
-                if (list[i].Except(list[i + 1]).Any())
-                {
-                    listExcept = new HashSet<string>(list[i].Except(list[i + 1]));
-
-                }
-                
-                tempList = new HashSet<string>(listIntersect.Union(listExcept).ToList());
-                var result = (from m in tempList select m).Distinct().ToList();
-                Console.Write("{");
-
-                foreach (var s in tempList)
-                {
-                    Console.Write(" {0}", s);
-                }
-                Console.WriteLine(" }");
-
+                listExcept = new HashSet<string>(list[i].Except(list[i + 1]));
+                listExcept.ExceptWith(sumAll);
+                sumAll.UnionWith(listExcept);
 
                 i++;
 
                 if (i == list.Count() - 1)
                 {
-                    listRest = new HashSet<string>(list[list.Count() - 1].Except(tempList));
+                    listEndExc = new HashSet<string>(list[list.Count() - 1]);
+                    listEndExc.ExceptWith(sumAll);
 
                 }
 
+                List<string> kkk = new List<string>(listIntersect);// List of Intersect
+                List<string> mmm = new List<string>(listExcept);// List of Except
+                List<string> nnn = new List<string>(listEndExc);
+                if (kkk.Any())
+                {
+                    tmpIntExc.Add(kkk);
+                }
+                if (mmm.Any())
+                {
+                    tmpIntExc.Add(mmm);
+                }
+                if (nnn.Any())
+                {
+                    tmpIntExc.Add(nnn);
+                }
 
 
-
-                listAll = new HashSet<string>(tempList.Union(listRest));
-
-
-                // DisplaySet(listAll);
             }
 
-
-
-
+            DisplaySet(tmpIntExc);
             Console.ReadKey();
 
         }
