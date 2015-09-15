@@ -37,7 +37,7 @@ namespace SignatureGroupConverter.Core
 
         }
 
-
+        
         private static void DisplaySet(List<List<string>> set)
         {
             set = set.OrderBy(item => item.Count()).ToList();
