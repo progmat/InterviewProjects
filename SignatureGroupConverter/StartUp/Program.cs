@@ -13,18 +13,27 @@ namespace StartUp
     {
         static void Main(string[] args)
         {
+
             var allLists = new List<List<string>>
             {
-                new List<string> { "A","B","C","D","E","F" },
-                new List<string> { "A","E","G" },
-                new List<string> { "F" }
+                new List<string> { "A","B" },
+                new List<string> { "A","B","C" }
             };
 
-           
             var result = ListHelper.TransformPartnerItemListToPartnerGroupList(allLists);
-            //Console.WriteLine("Hello");
-            Console.ReadKey();
+                //Console.WriteLine("Hello");
+                Console.ReadKey();
         }
-       
+
+        private static void DisplaySet(HashSet<int> set)
+        {
+            Console.Write("{");
+            foreach (var i in set)
+            {
+                Console.Write(" {0}", i);
+            }
+            Console.WriteLine(" }");
+        }
+
     }
 }

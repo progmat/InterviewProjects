@@ -40,6 +40,7 @@ namespace SignatureGroupConverter.Core
 
         private static void DisplaySet(List<List<string>> set)
         {
+            set = set.OrderBy(item => item.Count()).ToList();
             foreach (var sublist in set)
             {
                 Console.Write("{");
@@ -58,6 +59,8 @@ namespace SignatureGroupConverter.Core
 
 
             list = list.OrderBy(item => item.Count()).ToList();
+            
+
             HashSet<string> sumAll = new HashSet<string>();
             HashSet<string> listIntersect = new HashSet<string>();
             HashSet<string> listExcept = new HashSet<string>();
