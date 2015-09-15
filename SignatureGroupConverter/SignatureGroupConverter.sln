@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SignatureGroupConverter.Tes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StartUp", "StartUp\StartUp.csproj", "{36E5287C-6FF1-4946-9597-2786950C9F82}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloP", "HelloP\HelloP.csproj", "{D92048A8-2330-42AF-822C-029F8D8C4836}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,10 +27,6 @@ Global
 		{36E5287C-6FF1-4946-9597-2786950C9F82}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{36E5287C-6FF1-4946-9597-2786950C9F82}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{36E5287C-6FF1-4946-9597-2786950C9F82}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D92048A8-2330-42AF-822C-029F8D8C4836}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D92048A8-2330-42AF-822C-029F8D8C4836}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D92048A8-2330-42AF-822C-029F8D8C4836}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D92048A8-2330-42AF-822C-029F8D8C4836}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
