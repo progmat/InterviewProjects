@@ -40,7 +40,9 @@ namespace SignatureGroupConverter.Core
         
         private static void DisplaySet(List<List<string>> set)
         {
-            set = set.OrderBy(item => item.Count()).ToList();
+
+            set = set.OrderBy(item => item.Count()).ThenBy((item => item.First())).ToList();
+
             foreach (var sublist in set)
             {
                 Console.Write("{");
@@ -56,20 +58,22 @@ namespace SignatureGroupConverter.Core
 
         public static void OrderByCount(List<List<String>> list)
         {
-
+           
 
             list = list.OrderBy(item => item.Count()).ToList();
             
 
             HashSet<string> sumAll = new HashSet<string>();
+           
             HashSet<string> listIntersect = new HashSet<string>();
             HashSet<string> listExcept = new HashSet<string>();
             HashSet<string> listEndExc = new HashSet<string>();
             List<List<string>> tmpIntExc = new List<List<string>>(); // List of lists
             int i = 0;
+            
             while (i < list.Count() - 1)
             {
-          
+                
                 listIntersect = new HashSet<string>(list[i].Intersect(list[i + 1]));
                 listIntersect.ExceptWith(sumAll);
                 sumAll.UnionWith(listIntersect);
@@ -86,27 +90,40 @@ namespace SignatureGroupConverter.Core
                     listEndExc.ExceptWith(sumAll);
 
                 }
+               
 
                 List<string> kkk = new List<string>(listIntersect);// List of Intersect
                 List<string> mmm = new List<string>(listExcept);// List of Except
                 List<string> nnn = new List<string>(listEndExc);
+             
+
                 if (kkk.Any())
                 {
                     tmpIntExc.Add(kkk);
                 }
+
                 if (mmm.Any())
                 {
                     tmpIntExc.Add(mmm);
                 }
+
                 if (nnn.Any())
                 {
                     tmpIntExc.Add(nnn);
                 }
-
+              
+               
+                
+            }
+            if (tmpIntExc.Any())
+            {
+                DisplaySet(tmpIntExc);
+            }
+            else {
+                DisplaySet(list);
 
             }
-
-            DisplaySet(tmpIntExc);
+            
             Console.ReadKey();
 
         }
