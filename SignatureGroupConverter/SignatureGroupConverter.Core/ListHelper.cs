@@ -30,33 +30,29 @@ namespace SignatureGroupConverter.Core
 
         public static List<List<string>> TransformPartnerItemListToPartnerGroupList(List<List<string>> allLists)
         {
-
-            OrderByCount(allLists);
-
-            throw new NotImplementedException();
-
-        }
-
-        
-        private static void DisplaySet(List<List<string>> set)
-        {
-
-            set = set.OrderBy(item => item.Count()).ThenBy((item => item.First())).ToList();
-
-            foreach (var sublist in set)
-            {
-                Console.Write("{");
-                foreach (var k in sublist)
-                {
-                    Console.Write("{0}", k);
-
-                }
-                Console.WriteLine("}");
-            }
+            return OrderByCount(allLists);
         }
 
 
-        public static void OrderByCount(List<List<String>> list)
+        /*  private static void DisplaySet(List<List<string>> set)
+          {
+
+              set = set.OrderBy(item => item.Count()).ThenBy((item => item.First())).ToList();
+
+              foreach (var sublist in set)
+              {
+                  Console.Write("{");
+                  foreach (var k in sublist)
+                  {
+                      Console.Write("{0}", k);
+
+                  }
+                  Console.WriteLine("}");
+              }
+          }*/
+
+
+        public static List<List<String>> OrderByCount(List<List<String>> list)
         {
            
 
@@ -115,16 +111,17 @@ namespace SignatureGroupConverter.Core
                
                 
             }
+
+
             if (tmpIntExc.Any())
             {
-                DisplaySet(tmpIntExc);
+                return tmpIntExc.OrderBy(l => l.Count).ThenBy((l => l.First())).ToList();
             }
-            else {
-                DisplaySet(list);
+            else
+            {
+                return list;
 
             }
-            
-            Console.ReadKey();
 
         }
 
